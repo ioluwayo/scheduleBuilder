@@ -1,19 +1,9 @@
 import psycopg2
 import itertools
-
+from school import *
 # Created by Ibukun on 11/7/2016.
 
 
-class CourseClass:
-    
-    def __init__(self, id, code):
-        self.id = id
-        self.code = str(code)
-        
-    def printobject (self):
-        print self.id, " ", self.code
-        
-        
 def remove_sections_of_unwanted_courses(sec, wanted_courses):
     result = []
     for sec in sec:
@@ -45,9 +35,13 @@ id_courses_wanted = []
 for course in courses:
     id_courses_wanted.append(course[0])
     
-#print"\n\tID of Courses wanted\n"
-#for courseId in id_courses_wanted:
-    #print'\t', courseId
+      
+#  CREATE COURSE OBJECTS FROM THOSE IN DATABASE....IDEALY IT SHOULD BE FROM THOSE SECTED BY USER.
+course_objects = []
+for course in courses:
+    course_objects.append(Course(course[0], course[1]))
+for i in range(len(course_objects)):
+    print course_objects[i].toString()
 
 # ----sections------
 cur.execute("""SELECT * from Sections WHERE open = TRUE""")
@@ -57,6 +51,14 @@ for section in sections:
     print "\t", section
     
 first_filtered_sections_id = remove_sections_of_unwanted_courses(sections, id_courses_wanted)
+
+# CREATE OBJECTS OF OPEN SECTIONS IN DATABASE.
+section_objects = []
+for section in sections:
+    section_objects.append(Section(section[0], section[1]))
+for i in range(len(section_objects)):
+    print section_objects[i].toString()
+
 
 print "\n\tID of Sections of only courses wanted\n"
 for i_d in first_filtered_sections_id:
@@ -75,9 +77,6 @@ print "--------------------------------------------"
 print"we have section list based on requested course. we need to remove combinations that have more than 1" \
      "section with the same course id. we might use some type of for loop"
 
-
-    
-    
 
      
 # # ------classes------

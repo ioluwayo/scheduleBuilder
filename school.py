@@ -6,46 +6,99 @@ import itertools
 
 class Class:
     def __init__(self, class_id, section_id, day, startime, endtime):
-        self.class_id = class_id
-        self.section_id = section_id
-        self.starttime = time(startime)
-        self.endtime = time(endtime)
-        self.day = day
+        """
+
+        :param class_id:
+        :param section_id:
+        :param day:
+        :param startime:
+        :param endtime:
+        """
+        self.__class_id = class_id
+        self.__section_id = section_id
+        self.__starttime = time(startime)
+        self.__endtime = time(endtime)
+        self.__day = day
         
-    def to_string(self):
-        string_format = str(self.class_id) + str(self.section_id) + str(self.day) + str(self.starttime.isoformat()) + str(self.endtime.isoformat())
-        return string_format
-        ####
+    def toString(self):
+        """
+
+        :return: All atributes of the object as a string
+        """
+        return str(self.__class_id) + str(self.__section_id) + str(self.__day) + str(self.__starttime.isoformat()) + str(self.__endtime.isoformat())
         
 class Section:
     def __init__(self, section_id, course_id):
-        self.section_id = section_id
-        self.course_id =course_id
-        self.classes = []
+        """
         
-    def add_class(self, classobject):
+        :param section_id:
+        :param course_id:
+        """
+        self.__section_id = section_id
+        self.__course_id = course_id
+        self.__classes = []
+        
+    def addClass(self, classobject):
+        """
+        
+        :param classobject:
+        :return: None
+        """
         self.classes.append(classobject)
-        
-    def to_string(self):
-        string_format = str(self.section_id) + "," + str(self.course_id)
-        return string_format
         # each section should have a list of its classes
-
+        
+    def getCoureId(self):
+        """
+        :return: The course ID
+        """
+        return self.__course_id
+    
+    def getSectionId(self):
+        """
+        
+        :return: The Section ID
+        """
+        return self.__section_id
+    
+    def toString(self):
+        """
+        
+        :return: All atributes of the object as a string
+        """
+        return str(self.__section_id) + "," + str(self.__course_id)
 
 class Course:
     def __init__(self, course_id, course_code):
-        self.course_id = course_id
-        self.course_code = str(course_code)
-        self.sections = []
+        """
         
-    def add_section(self, section):
+        :param course_id:
+        :param course_code:
+        """
+        self.__course_id = course_id
+        self.__course_code = str(course_code)
+        self.__sections = []
+        
+    def addSection(self, section):
+        """
+        
+        :param section:
+        :return: None
+        """
         self.sections.append(section)
         #  each course has a list of section objects attached to it.
+    
+    def getCourseId(self):
+        """
         
-    def to_string(self):
-        string_format = str(self.course_id) + str(self.course_code) + str(self.sections)
-        return string_format
-
+        :return: The Course ID
+        """
+        return self.__course_id
+    
+    def getCourseCode(self):
+        """
+        :return: The course code
+        """
+        return self.__course_code
 
 class Filter:
     def __init__(self,list1):
@@ -68,4 +121,3 @@ class Filter:
             return True
         else:
             return False
-
