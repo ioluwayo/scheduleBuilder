@@ -127,4 +127,3 @@ class Filter:
             return True
         else:
             return False
->>>>>>> f7db4a898720c4fe5fc3391f6fd724f3281823f5
