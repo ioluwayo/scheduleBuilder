@@ -1,11 +1,13 @@
 # Created by Ibukun on 11/18/2016.
 from datetime import datetime, date, time
 
+import itertools
+
 
 class Class:
     def __init__(self, class_id, section_id, day, startime, endtime):
         """
-        
+
         :param class_id:
         :param section_id:
         :param day:
@@ -20,7 +22,7 @@ class Class:
         
     def toString(self):
         """
-        
+
         :return: All atributes of the object as a string
         """
         return str(self.__class_id) + str(self.__section_id) + str(self.__day) + str(self.__starttime.isoformat()) + str(self.__endtime.isoformat())
@@ -47,7 +49,6 @@ class Section:
         
     def getCoureId(self):
         """
-        
         :return: The course ID
         """
         return self.__course_id
@@ -65,7 +66,6 @@ class Section:
         :return: All atributes of the object as a string
         """
         return str(self.__section_id) + "," + str(self.__course_id)
-
 
 class Course:
     def __init__(self, course_id, course_code):
@@ -99,9 +99,25 @@ class Course:
         :return: The course code
         """
         return self.__course_code
-        
-    def toString(self):
-        """
-        :return: All atributes of the object as a string
-        """
-        return str(self.__course_id) + str(self.__course_code) + str(self.__sections)
+
+class Filter:
+    def __init__(self,list1):
+        #each element of this list is itself a list of sections
+        self.list1 = list1
+
+    def listOfAvailableSchedules(self):
+        #get permutations
+        list_containing_all_possible_section_arrangement = itertools.combinations(list)
+
+        return filter(self.contains_unique_id(), list_containing_all_possible_section_arrangement)
+        #  we need to take this result and further filter it this time ensuring that the times dont clash
+        #filtered_list = filter(self.contains_unique_id(), list_containing_all_possible_section_arrangement)
+
+    def containsUniqueID(self, list1):
+        course_id_list = [i.course_id for i in list1]
+        duplicate_free_list = list(set(course_id_list))
+
+        if len(duplicate_free_list) == len(list):
+            return True
+        else:
+            return False
