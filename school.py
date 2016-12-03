@@ -1,6 +1,8 @@
 # Created by Ibukun on 11/18/2016.
 from datetime import datetime, date, time
 
+import itertools
+
 
 class Class:
     def __init__(self, class_id, section_id, day, startime, endtime):
@@ -43,3 +45,27 @@ class Course:
     def to_string(self):
         string_format = str(self.course_id) + str(self.course_code) + str(self.sections)
         return string_format
+
+
+class Filter:
+    def __init__(self,list1):
+        #each element of this list is itself a list of sections
+        self.list1 = list1
+
+    def listOfAvailableSchedules(self):
+        #get permutations
+        list_containing_all_possible_section_arrangement = itertools.combinations(list)
+
+        return filter(self.contains_unique_id(), list_containing_all_possible_section_arrangement)
+        #  we need to take this result and further filter it this time ensuring that the times dont clash
+        #filtered_list = filter(self.contains_unique_id(), list_containing_all_possible_section_arrangement)
+
+    def containsUniqueID(self, list1):
+        course_id_list = [i.course_id for i in list1]
+        duplicate_free_list = list(set(course_id_list))
+
+        if len(duplicate_free_list) == len(list):
+            return True
+        else:
+            return False
+
