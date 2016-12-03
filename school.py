@@ -13,7 +13,7 @@ class Class:
     def to_string(self):
         string_format = str(self.class_id) + str(self.section_id) + str(self.day) + str(self.starttime.isoformat()) + str(self.endtime.isoformat())
         return string_format
-        
+        ####
         
 class Section:
     def __init__(self, section_id, course_id):
